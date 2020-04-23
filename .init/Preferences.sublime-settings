@@ -1,0 +1,36 @@
+{
+  "auto_complete": true,
+  "bold_folder_labels": true,
+  "color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+  "default_encoding": "UTF-8",
+  "ensure_newline_at_eof_on_save": true,
+  "file_exclude_patterns":
+  [
+    ".DS_Store",
+    "Desktop.ini",
+    "*.pyc",
+    "._*",
+    "Thumbs.db",
+    ".Spotlight-V100",
+    ".Trashes"
+  ],
+  "folder_exclude_patterns":
+  [
+    ".git",
+    "node_modules"
+  ],
+  "font_face": "Fira Code Retina",
+  "font_size": 16,
+  "highlight_line": true,
+  "highlight_modified_tabs": true,
+  "hot_exit": false,
+  "line_padding_bottom": 2,
+  "line_padding_top": 2,
+  "match_brackets": true,
+  "show_encoding": true,
+  "show_line_endings": true,
+  "tab_size": 2,
+  "translate_tabs_to_spaces": false,
+  "trim_trailing_white_space_on_save": true,
+  "word_wrap": true
+}
