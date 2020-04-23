@@ -39,6 +39,8 @@ brew install zsh
 brew install antigen
 # Install n
 brew install n
+# Install yarn
+brew install yarn
 
 # Install font tools.
 brew tap bramstein/webfonttools
