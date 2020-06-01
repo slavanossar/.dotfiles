@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-# n
-export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
-
 # MAMP PHP
 export PHP_VERSION=`grep "alias php" ~/.profile | cut -d"/" -f6 | cut -c4-`
 export PHPRC="/Library/Application Support/appsolute/MAMP PRO/conf/"
 export PATH=/Applications/MAMP/bin/php/php$PHP_VERSION/bin:$PATH
+
+# n
+export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
+# Postgress.app CLI Tools
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
