@@ -23,14 +23,14 @@ unset file;
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source $(brew --prefix)/share/antigen/antigen.zsh
+#source $(brew --prefix)/share/antigen/antigen.zsh
 
 # Load Theme
-antigen use oh-my-zsh
-antigen theme denysdovhan/spaceship-prompt
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen apply
+#antigen use oh-my-zsh
+#antigen theme denysdovhan/spaceship-prompt
+#antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen apply
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
