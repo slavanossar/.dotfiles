@@ -171,3 +171,8 @@ function cg {
   tree_root="$(git_root)"
   [[ "x${tree_root}" != "x./" ]] && cd "${tree_root}" && return || return 0
 }
+
+# Generates a random alhpanumeric string, optional argument sets length (default: 32)
+function rand() {
+  echo $RANDOM | md5sum | head -c ${1:-32}; echo;
+}
