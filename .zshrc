@@ -15,6 +15,10 @@ for file in ~/.{path,exports,aliases,functions,extra,profile}; do
 done;
 unset file;
 
+# Set PATH, MANPATH, etc., for Homebrew on Apple Silicon
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
