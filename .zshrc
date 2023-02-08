@@ -18,6 +18,8 @@ unset file;
 # Set PATH, MANPATH, etc., for Homebrew on Apple Silicon
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# mkcert
+# export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
