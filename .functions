@@ -174,5 +174,8 @@ function cg {
 
 # Generates a random alhpanumeric string, optional argument sets length (default: 32)
 function rand() {
-  echo $RANDOM | md5sum | head -c ${1:-32}; echo;
+  local length=${1:-32}
+  local chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  local random_string=$(LC_CTYPE=C tr -dc "$chars" < /dev/urandom | fold -w "$length" | head -n 1)
+  echo "$random_string"
 }
