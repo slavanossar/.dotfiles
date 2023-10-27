@@ -37,6 +37,7 @@ brew install gmp
 # Install zsh and antigen
 brew install zsh
 brew install antigen
+
 # Install n
 brew install n
 # Install PNPM
@@ -44,6 +45,8 @@ brew install pnpm
 # Install yarn
 brew install yarn
 
+# Install nginx
+brew install nginx
 # Install mkcert
 brew install mkcert
 
