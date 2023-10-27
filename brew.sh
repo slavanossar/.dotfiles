@@ -39,8 +39,13 @@ brew install zsh
 brew install antigen
 # Install n
 brew install n
+# Install PNPM
+brew install pnpm
 # Install yarn
 brew install yarn
+
+# Install mkcert
+brew install mkcert
 
 # Install font tools.
 brew tap bramstein/webfonttools
