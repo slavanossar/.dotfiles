@@ -12,4 +12,6 @@ Preferences files are located in `.init`.
 
 ### Divvy
 
-Place file in `~/Library/Preferences`
+1. Shut down Divvy
+2. Copy preferences file to `~/Library/Preferences`
+3. Reboot
