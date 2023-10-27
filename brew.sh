@@ -49,6 +49,8 @@ brew install yarn
 brew install nginx
 # Install mkcert
 brew install mkcert
+# Install hostctl
+brew install guumaster/tap/hostctl
 
 # Install font tools.
 brew tap bramstein/webfonttools
