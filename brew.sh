@@ -73,7 +73,7 @@ brew install rename
 brew install ssh-copy-id
 brew install tree
 brew install vbindiff
-brew install youtube-dl
+brew install yt-dlp
 brew install zopfli
 
 # Remove outdated versions from the cellar.
