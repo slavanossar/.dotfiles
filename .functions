@@ -230,16 +230,23 @@ function mdb-restore() {
 
 # MongoDB names function
 function _mongo_db_names_autocomplete() {
-  local -a dbs
-  dbs=("${(@f)$(mongosh --quiet --eval '(async () => { const result = await db.adminCommand("listDatabases"); print(result.databases.map(d => d.name).join("\n")) })()' 2>/dev/null)}")
+  local cache_file="/tmp/.mongo_db_names_cache"
+  local cache_ttl=10  # seconds
 
-  case $CURRENT in
-    2)
-      compadd -a dbs
-      ;;
-    3)
-      _files -/
-      ;;
-  esac
+  if [[ $CURRENT -eq 2 ]]; then
+    local -a dbs
+
+    if [[ -f $cache_file && $(($(date +%s) - $(stat -f %m "$cache_file"))) -lt $cache_ttl ]]; then
+      dbs=("${(@f)$(<"$cache_file")}")
+    else
+      dbs=("${(@f)$(mongosh --quiet --eval '(async () => { const result = await db.adminCommand("listDatabases"); print(result.databases.map(d => d.name).join("\n")) })()' 2>/dev/null)}")
+      print -l -- "${dbs[@]}" >| "$cache_file"
+    fi
+
+    compadd -a dbs
+
+  elif [[ $CURRENT -eq 3 ]]; then
+    _files -/
+  fi
 }
 
