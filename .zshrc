@@ -39,4 +39,4 @@ source $ZSH/oh-my-zsh.sh
 #antigen apply
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $(grep '^Host ' ~/.ssh/config | awk '{print $2}' | grep -v '[*?]')
