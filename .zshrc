@@ -7,9 +7,6 @@ export ZSH=$HOME/.oh-my-zsh
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-# Set PATH, MANPATH, etc., for Homebrew on Apple Silicon
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -18,8 +15,8 @@ for file in ~/.{path,exports,aliases,functions,extra,profile}; do
 done;
 unset file;
 
-# mkcert
-# export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+# Set PATH, MANPATH, etc., for Homebrew on Apple Silicon
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
