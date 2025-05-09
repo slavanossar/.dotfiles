@@ -179,3 +179,61 @@ function rand() {
   local random_string=$(LC_CTYPE=C tr -dc "$chars" < /dev/urandom | fold -w "$length" | head -n 1)
   echo "$random_string"
 }
+
+# Dump a MongoDB database to a backup directory
+function mdb_dump() {
+  if [ $# -ne 2 ]; then
+    echo "Usage: mdb_dump <db-name> <output-path>"
+    return 1
+  fi
+
+  local db_name="$1"
+  local output_path="$2"
+
+  echo "Dumping MongoDB database '$db_name' to:"
+  echo "  $output_path"
+
+  mongodump --db="$db_name" --out="$output_path"
+}
+
+# Restore a MongoDB database from a backup directory
+function mdb_restore() {
+  if [ $# -ne 2 ]; then
+    echo "Usage: mongo_restore <db-name> <backup-path>"
+    return 1
+  fi
+
+  local db_name="$1"
+  local backup_path="$2"
+
+  if [ ! -d "$backup_path" ]; then
+    echo "Error: Backup path '$backup_path' does not exist or is not a directory"
+    return 1
+  fi
+
+  echo "You are about to DROP and restore the MongoDB database '$db_name' from:"
+  echo "  $backup_path"
+  read -p "Are you sure? [y/N] " confirm
+
+  case "$confirm" in
+    [yY][eE][sS]|[yY])
+      echo "Restoring..."
+      mongorestore --drop --db "$db_name" "$backup_path"
+      echo "Restore complete."
+      ;;
+    *)
+      echo "Aborted."
+      ;;
+  esac
+}
+
+# MongoDB names function
+function _mongo_db_names_autocomplete() {
+  local -a dbs
+  dbs=("${(@f)$(mongosh --quiet --eval '(async () => { const result = await db.adminCommand("listDatabases"); print(result.databases.map(d => d.name).join("\n")) })()' 2>/dev/null)}")
+
+  # Only complete first argument (db name)
+  if [[ $CURRENT -eq 2 ]]; then
+    _describe 'databases' dbs
+  fi
+}

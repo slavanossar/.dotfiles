@@ -37,3 +37,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 zstyle ':completion:*:(ssh|scp|sftp):*' hosts $(grep '^Host ' ~/.ssh/config | awk '{print $2}' | grep -v '[*?]')
+
+# Add tab completion for mongo functions
+autoload -Uz add-zsh-hook
+
+add-zsh-hook precmd () {
+  (( $+functions[_mongo_db_names_autocomplete] )) && compdef _mongo_db_names_autocomplete mdb_restore
+}
