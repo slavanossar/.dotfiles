@@ -233,8 +233,13 @@ function _mongo_db_names_autocomplete() {
   local -a dbs
   dbs=("${(@f)$(mongosh --quiet --eval '(async () => { const result = await db.adminCommand("listDatabases"); print(result.databases.map(d => d.name).join("\n")) })()' 2>/dev/null)}")
 
-  # Only complete first argument (db name)
-  if [[ $CURRENT -eq 2 ]]; then
-    _describe 'databases' dbs
-  fi
+  case $CURRENT in
+    2)
+      compadd -a dbs
+      ;;
+    3)
+      _files -/
+      ;;
+  esac
 }
+
