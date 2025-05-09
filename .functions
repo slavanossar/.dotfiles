@@ -213,7 +213,8 @@ function mdb_restore() {
 
   echo "You are about to DROP and restore the MongoDB database '$db_name' from:"
   echo "  $backup_path"
-  read -p "Are you sure? [y/N] " confirm
+  echo -n "Are you sure? [y/N] "
+  read confirm
 
   case "$confirm" in
     [yY][eE][sS]|[yY])
