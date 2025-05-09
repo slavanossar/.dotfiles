@@ -15,9 +15,6 @@ for file in ~/.{path,exports,aliases,functions,extra,profile}; do
 done;
 unset file;
 
-# Set PATH, MANPATH, etc., for Homebrew on Apple Silicon
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -42,5 +39,6 @@ zstyle ':completion:*:(ssh|scp|sftp):*' hosts $(grep '^Host ' ~/.ssh/config | aw
 autoload -Uz add-zsh-hook
 
 add-zsh-hook precmd () {
-  (( $+functions[_mongo_db_names_autocomplete] )) && compdef _mongo_db_names_autocomplete mdb_restore
+  (( $+functions[_mongo_db_names_autocomplete] )) && compdef _mongo_db_names_autocomplete mdb-dump
+  (( $+functions[_mongo_db_names_autocomplete] )) && compdef _mongo_db_names_autocomplete mdb-restore
 }

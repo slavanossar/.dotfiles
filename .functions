@@ -181,9 +181,9 @@ function rand() {
 }
 
 # Dump a MongoDB database to a backup directory
-function mdb_dump() {
+function mdb-dump() {
   if [ $# -ne 2 ]; then
-    echo "Usage: mdb_dump <db-name> <output-path>"
+    echo "Usage: mdb-dump <db-name> <output-path>"
     return 1
   fi
 
@@ -197,9 +197,9 @@ function mdb_dump() {
 }
 
 # Restore a MongoDB database from a backup directory
-function mdb_restore() {
+function mdb-restore() {
   if [ $# -ne 2 ]; then
-    echo "Usage: mongo_restore <db-name> <backup-path>"
+    echo "Usage: mdb-restore <db-name> <backup-path>"
     return 1
   fi
 
