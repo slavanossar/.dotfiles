@@ -6,10 +6,10 @@
 #export PATH=/Applications/MAMP/bin/php/php$PHP_VERSION/bin:$PATH
 
 # mkcert
-#export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
 
 # n
 export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 # Postgress.app CLI Tools
-#export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
