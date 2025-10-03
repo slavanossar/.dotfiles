@@ -5,15 +5,13 @@ cd "$(dirname "${BASH_SOURCE}")";
 git pull origin master;
 
 function doIt() {
-  rsync --exclude ".git/" \
-    --exclude ".DS_Store" \
-    --exclude "bootstrap.sh" \
-    --exclude "brew.sh" \
-    --exclude "setup.sh" \
-    --exclude "fonts/" \
-    --exclude "README.md" \
-    --exclude "LICENSE-MIT.txt" \
-    -avh --no-perms . ~;
+  # Create symlinks for dotfiles
+  ln -sf "$(pwd)/.aliases" ~/.aliases
+  ln -sf "$(pwd)/.exports" ~/.exports
+  ln -sf "$(pwd)/.functions" ~/.functions
+  ln -sf "$(pwd)/.zshrc" ~/.zshrc
+  
+  # Copy fonts
   cp fonts/* ~/Library/Fonts;
   source ~/.zshrc;
 }
