@@ -250,3 +250,63 @@ function _mongo_db_names_autocomplete() {
   fi
 }
 
+# 2pass ffmpeg encoding
+2pass() {
+  local WIDTH=''
+  local SIZE_MB=''
+  local INPUT_FILE=''
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -w|--width)
+        WIDTH="$2"
+        shift 2
+        ;;
+      -s|--size)
+        SIZE_MB="$2"
+        shift 2
+        ;;
+      -*)
+        echo "Unknown option: $1" >&2
+        return 1
+        ;;
+      *)
+        INPUT_FILE="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$INPUT_FILE" ]]; then
+    echo "Error: no input file provided" >&2
+    return 1
+  fi
+
+  if [[ -z "$SIZE_MB" ]]; then
+    echo "Error: --size is required" >&2
+    return 1
+  fi
+
+  if [[ ! -f "$INPUT_FILE" ]]; then
+    echo "Error: file '$INPUT_FILE' not found" >&2
+    return 1
+  fi
+
+  mkdir -p output
+
+  local SIZE_KB=$((SIZE_MB * 8000))
+  local DURATION=$(ffprobe -i "$INPUT_FILE" -show_entries format=duration -v quiet -of csv="p=0")
+  local BITRATE=$(echo "$SIZE_KB / $DURATION" | bc)
+
+  local SCALE_FILTER=""
+  if [[ -n "$WIDTH" ]]; then
+    SCALE_FILTER="-vf scale=${WIDTH}:-2"
+  fi
+
+  local BASENAME=$(basename "$INPUT_FILE")
+  local NAME="${BASENAME%.*}"
+
+  ffmpeg -y -i "$INPUT_FILE" $SCALE_FILTER -c:v libx264 -preset medium -b:v "${BITRATE}k" -pass 1 -pix_fmt yuv420p -f mp4 /dev/null && \
+  ffmpeg -i "$INPUT_FILE" $SCALE_FILTER -c:v libx264 -preset medium -b:v "${BITRATE}k" -pass 2 -pix_fmt yuv420p "output/${NAME}.mp4"
+}
