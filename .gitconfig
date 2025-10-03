@@ -82,6 +82,9 @@
   # Show the user email for the current repository.
   whoami = config user.email
 
+  # Launch Cursor, for use with Sublime Merge
+  cursor = "!f() { cursor $1; }; f"
+
 [apply]
 
   # Detect whitespace errors when applying a patch
